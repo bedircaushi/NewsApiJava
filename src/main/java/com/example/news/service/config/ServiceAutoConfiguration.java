@@ -7,11 +7,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ServiceAutoConfiguration {
     @Bean
-    public CarService carService(){
-        return new DefaultCarService();
-    }
-
-    @Bean
     public AdminService adminService(){
         return new DefaultAdminService();
     }

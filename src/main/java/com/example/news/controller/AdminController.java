@@ -4,7 +4,7 @@ import com.example.news.input.LogIn;
 import com.example.news.input.SignUp;
 import com.example.news.input.UpdateAdmin;
 import com.example.news.pojo.Admin;
-import com.example.news.pojo.Message;
+import com.example.news.input.Message;
 import com.example.news.pojo.News;
 import com.example.news.service.AdminService;
 import com.example.news.service.NewsService;

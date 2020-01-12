@@ -1,6 +1,8 @@
 package com.example.news.pojo;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,8 +10,12 @@ import javax.persistence.*;
 public class News {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "hash_")
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(name = "id")
+    private String id;
+
+    @Column(name = "hash")
     private String hash;
 
     @Column(name = "title")
@@ -46,8 +52,8 @@ public class News {
     }
 
     public News(final String hash, final String title, final String description, final String sport, final String teamCode, final String image,
-                final String league, final String team, final String link, final String publishedAt){
-        this.hash=hash;
+                final String league, final String team, final String link, final String publishedAt, final String username){
+        this.hash = hash;
         this.title = title;
         this.description=description;
         this.sport=sport;
@@ -56,6 +62,7 @@ public class News {
         this.league=league;
         this.team=team;
         this.link=link;
+        this.username = username;
         this.publishedAt=publishedAt;
     }
 

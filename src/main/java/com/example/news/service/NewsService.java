@@ -1,5 +1,6 @@
 package com.example.news.service;
 
+import com.example.news.input.NewsInput;
 import com.example.news.pojo.Admin;
 import com.example.news.pojo.News;
 
@@ -12,4 +13,6 @@ public interface NewsService {
     void deleteNews(String hash);
     News findOne(String hash);
     List<News> findByUsername(Admin admin);
+    News create(NewsInput newsInput, Admin admin);
+    News update(NewsInput newsInput, Admin admin, String hash);
 }

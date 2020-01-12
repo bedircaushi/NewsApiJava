@@ -1,4 +1,4 @@
-package com.example.news.pojo;
+package com.example.news.input;
 
 public class Message {
     private String error;

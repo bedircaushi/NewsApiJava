@@ -12,6 +12,9 @@ public class News {
     @Column(name = "hash_")
     private String hash;
 
+    @Column(name = "title")
+    private String title;
+
     @Column(name = "descr")
     private String description;
 
@@ -42,9 +45,10 @@ public class News {
     public News() {
     }
 
-    public News(final String hash, final String description, final String sport, final String teamCode, final String image,
+    public News(final String hash, final String title, final String description, final String sport, final String teamCode, final String image,
                 final String league, final String team, final String link, final String publishedAt){
         this.hash=hash;
+        this.title = title;
         this.description=description;
         this.sport=sport;
         this.teamCode=teamCode;
@@ -54,15 +58,25 @@ public class News {
         this.link=link;
         this.publishedAt=publishedAt;
     }
+
     public News(final String description){
         this.description=description;
     }
+
     public String getHash() {
         return hash;
     }
 
     public void setHash(String hash) {
         this.hash = hash;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {

@@ -1,5 +1,6 @@
 package com.example.news.service;
 
+import com.example.news.pojo.Admin;
 import com.example.news.pojo.News;
 import com.example.news.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,10 @@ public class DefaultNewsService implements NewsService {
         if(newsRepository.findOneByHash(hash)!=null){
             newsRepository.delete(newsRepository.findOneByHash(hash));
         }
+    }
+
+    @Override
+    public List<News> findByUsername(Admin admin){
+        return newsRepository.findByUsername(admin.getUsername());
     }
 }

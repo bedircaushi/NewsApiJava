@@ -1,5 +1,6 @@
 package com.example.news.repository;
 
+import com.example.news.pojo.Admin;
 import com.example.news.pojo.News;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,5 @@ public interface NewsRepository extends CrudRepository<News,String> {
     List<News> findAllBySportAndLeague(String sport, String league);
     void delete(News news);
     News findOneByHash(String hash);
+    List<News> findByUsername(String username);
 }

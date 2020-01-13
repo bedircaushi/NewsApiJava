@@ -12,4 +12,5 @@ public interface AdminService {
     Admin login(LogIn login);
     Admin signUp(SignUp signUp);
     Admin update(UpdateAdmin updateAdmin);
+    void delete(Admin admin);
 }

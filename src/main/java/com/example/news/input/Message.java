@@ -1,13 +1,13 @@
 package com.example.news.input;
 
 public class Message {
-    private String error;
+    private String msg;
 
-    public Message(String error) {
-        this.error = error;
+    public Message(String msg) {
+        this.msg = msg;
     }
 
-    public String getError() {
-        return error;
+    public String getMsg() {
+        return msg;
     }
 }

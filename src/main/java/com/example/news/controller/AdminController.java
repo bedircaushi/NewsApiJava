@@ -31,7 +31,7 @@ public class AdminController {
     private NewsService newsService;
 
 
-    @GetMapping("/admin")
+    @GetMapping("/admins")
     public List<Admin> getAllAdmins(){
         return adminService.findAll();
     }
@@ -61,14 +61,36 @@ public class AdminController {
 
     @PostMapping("/admin/update")
     public ResponseEntity update(@RequestBody UpdateAdmin updateAdmin, HttpServletRequest request) {
-        if (request.getSession() != null){
+        if (request.getSession().getAttribute("admin") != null) {
             Admin admin = adminService.update(updateAdmin);
             if (admin != null)
                 return new ResponseEntity<>(admin, HttpStatus.OK);
-            return new ResponseEntity<>(new Message("Admin with the username "
-                    + updateAdmin.getUsername() + " is not updated or does not exist"), HttpStatus.OK);
+            return new ResponseEntity<>(new Message("Admin is not updated or does not exist"), HttpStatus.OK);
         }
-        return new ResponseEntity<>("Not logged in", HttpStatus.OK);
+        return new ResponseEntity<>(new Message("Not logged in"), HttpStatus.OK);
+    }
+
+
+    @PostMapping("/admin/unregister")
+    public ResponseEntity unregister(HttpServletRequest request) {
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        if (admin != null){
+            adminService.delete(admin);
+
+            request.getSession().invalidate();
+            return new ResponseEntity<>(new Message("Successfully deleted"), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new Message("Not logged in"), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/admin/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse res) throws IOException {
+        if(request.getSession().getAttribute("admin") != null)
+            request.getSession().invalidate();
+
+        res.sendRedirect("/news");
+        return null;
     }
 
 
@@ -92,13 +114,4 @@ public class AdminController {
 
     }
 
-
-    @GetMapping("/admin/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse res) throws IOException {
-        if(request.getSession() != null){
-            request.getSession().invalidate();
-        }
-        res.sendRedirect("/news");
-        return null;
-    }
 }

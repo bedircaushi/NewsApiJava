@@ -9,12 +9,11 @@ import com.example.news.pojo.News;
 import com.example.news.service.AdminService;
 import com.example.news.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,13 +26,16 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+
     @Autowired
     private NewsService newsService;
+
 
     @GetMapping("/admin")
     public List<Admin> getAllAdmins(){
         return adminService.findAll();
     }
+
 
     @PostMapping("/admin/login")
     public ResponseEntity login(@RequestBody LogIn logIn, HttpServletRequest request) {
@@ -46,6 +48,7 @@ public class AdminController {
         return new ResponseEntity<>(new Message("Wrong email or password"), HttpStatus.OK);
     }
 
+
     @PostMapping("/admin/signup")
     public ResponseEntity signUp(@RequestBody SignUp signUp) {
         Admin admin = adminService.signUp(signUp);
@@ -54,6 +57,7 @@ public class AdminController {
         return new ResponseEntity<>(new Message("Admin with the username "
                 + signUp.getUsername() + " exists"), HttpStatus.OK);
     }
+
 
     @PostMapping("/admin/update")
     public ResponseEntity update(@RequestBody UpdateAdmin updateAdmin, HttpServletRequest request) {
@@ -67,11 +71,16 @@ public class AdminController {
         return new ResponseEntity<>("Not logged in", HttpStatus.OK);
     }
 
+
     @GetMapping("/admin/news")
-    public ResponseEntity getAllNews(HttpServletRequest request){
+    public ResponseEntity getAllNews(HttpServletRequest request,
+                                     @RequestParam(value = "limit", defaultValue = "10") Integer limit,
+                                     @RequestParam(value = "offset", defaultValue = "0") Integer offset){
+
         Admin admin = (Admin) request.getSession().getAttribute("admin");
         if (admin != null) {
-            List<News> news = newsService.findByUsername(admin);
+            List<News> news = newsService.findByUsername(admin,
+                    PageRequest.of(offset, limit, Sort.by("publishedAt").descending()));
 
             if (news.isEmpty())
                 return new ResponseEntity<>(new Message("No news found for this admin"), HttpStatus.OK);
@@ -82,6 +91,7 @@ public class AdminController {
             return new ResponseEntity<>("Not logged in", HttpStatus.OK);
 
     }
+
 
     @GetMapping("/admin/logout")
     public String logout(HttpServletRequest request, HttpServletResponse res) throws IOException {

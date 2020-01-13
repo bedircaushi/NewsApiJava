@@ -10,10 +10,15 @@ import javax.persistence.*;
 public class News {
 
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name = "id")
-    private String id;
+    @GeneratedValue(
+            strategy= GenerationType.AUTO,
+            generator="native"
+    )
+    @GenericGenerator(
+            name = "native",
+            strategy = "native"
+    )
+    private Integer id;
 
     @Column(name = "hash")
     private String hash;

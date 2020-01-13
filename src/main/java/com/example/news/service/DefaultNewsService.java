@@ -5,6 +5,7 @@ import com.example.news.pojo.Admin;
 import com.example.news.pojo.News;
 import com.example.news.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -14,18 +15,18 @@ public class DefaultNewsService implements NewsService {
     private NewsRepository newsRepository;
 
     @Override
-    public List<News> getAll() {
-        return newsRepository.findAllByOrderByPublishedAtDesc();
+    public List<News> getAll(Pageable pageable) {
+        return newsRepository.findAll(pageable);
     }
 
     @Override
-    public List<News> getAllBySport(String sport) {
-        return newsRepository.findAllBySport(sport);
+    public List<News> getAllBySport(String sport, Pageable pageable) {
+        return newsRepository.findAllBySport(sport, pageable);
     }
 
     @Override
-    public List<News> getAllBySportAndLeague(String sport, String league) {
-        return newsRepository.findAllBySportAndLeague(sport, league);
+    public List<News> getAllBySportAndLeague(String sport, String league, Pageable pageable) {
+        return newsRepository.findAllBySportAndLeague(sport, league, pageable);
     }
 
     @Override
@@ -40,8 +41,8 @@ public class DefaultNewsService implements NewsService {
     }
 
     @Override
-    public List<News> findByUsername(Admin admin){
-        return newsRepository.findByUsername(admin.getUsername());
+    public List<News> findByUsername(Admin admin, Pageable pageable){
+        return newsRepository.findByUsername(admin.getUsername(), pageable);
     }
 
     @Override

@@ -6,11 +6,14 @@ import com.example.news.pojo.Admin;
 import com.example.news.pojo.News;
 import com.example.news.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.awt.print.Pageable;
 import java.util.List;
 
 @RestController
@@ -19,21 +22,51 @@ public class NewsController {
    @Autowired
    private NewsService newsService;
 
+
    @GetMapping("/news")
-   public List<News> getAllNews(){
-           return newsService.getAll();
+   public ResponseEntity getAllNews(@RequestParam(value = "limit", defaultValue = "10") Integer limit,
+                                @RequestParam(value = "offset", defaultValue = "0") Integer offset) {
+       
+       List<News> news = newsService.getAll(PageRequest
+               .of(offset, limit, Sort.by("publishedAt").descending()));
+
+       if(news.isEmpty())
+           return new ResponseEntity<>(new Message("No news found" ), HttpStatus.OK);
+
+       return new ResponseEntity<List>(news, HttpStatus.OK);
    }
+
 
    @GetMapping("/news/{sport}")
-   public List<News> getAllNewsBySport(@PathVariable(value = "sport") String sport){
-       return newsService.getAllBySport(sport);
+   public ResponseEntity getAllNewsBySport(@PathVariable(value = "sport") String sport,
+                                       @RequestParam(value = "limit", defaultValue = "10") Integer limit,
+                                       @RequestParam(value = "offset", defaultValue = "0") Integer offset) {
+
+        List<News> news = newsService.getAllBySport(sport, PageRequest
+                .of(offset, limit, Sort.by("publishedAt").descending()));
+
+        if(news.isEmpty())
+            return new ResponseEntity<>(new Message("No news found for " + sport), HttpStatus.OK);
+
+        return new ResponseEntity<List>(news, HttpStatus.OK);
    }
 
+
    @GetMapping("/news/{sport}/{league}")
-   public List<News> getAllNewsBySportAndLeague(@PathVariable(value = "sport") String sport,
-                                                 @PathVariable(value = "league") String league) {
-       return newsService.getAllBySportAndLeague(sport,league);
+   public ResponseEntity getAllNewsBySportAndLeague(@PathVariable(value = "sport") String sport,
+                                                @PathVariable(value = "league") String league,
+                                                @RequestParam(value = "limit", defaultValue = "10") Integer limit,
+                                                @RequestParam(value = "offset", defaultValue = "0") Integer offset) {
+
+       List<News> news = newsService.getAllBySportAndLeague(sport,league,PageRequest
+               .of(offset, limit, Sort.by("publishedAt").descending()));
+
+       if(news.isEmpty())
+           return new ResponseEntity<>(new Message("No news found for " + league), HttpStatus.OK);
+
+       return new ResponseEntity<List>(news, HttpStatus.OK);
    }
+
 
    @PostMapping("/news/add")
    public ResponseEntity addNews(HttpServletRequest request, @RequestBody NewsInput input) {
@@ -48,6 +81,7 @@ public class NewsController {
        else
            return new ResponseEntity<>(new Message("Not logged in"), HttpStatus.OK);
    }
+
 
    @PostMapping("/news/update/{hash}")
    public ResponseEntity updateNews(@PathVariable(value = "hash") String hash, HttpServletRequest request, @RequestBody NewsInput input) {
@@ -64,8 +98,10 @@ public class NewsController {
            return new ResponseEntity<>(new Message("Not logged in"), HttpStatus.OK);
    }
 
+
    @DeleteMapping("/news/{hash}")
    public void delete(@PathVariable(value = "hash") String hash){
        newsService.deleteNews(hash);
    }
+
 }

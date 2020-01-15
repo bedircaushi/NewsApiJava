@@ -34,17 +34,9 @@ insert into news (hash_,descr,sport,team_code,image,league,team,link,published_a
 insert into news (hash_,descr,sport,team_code,image,league,team,link,published_at,username,title) values ('ajasd5asdhq5dfd','liverpool lost champions league','football','LIV','image2','ucl','Liverpool','link','1/15/2019','rondemiri','liverpool ucl');
 insert into news (hash_,descr,sport,team_code,image,league,team,link,published_at,username,title) values ('aassd5asdhq5dfd','NBA has started','basketball','BOC','image3','NBA','Boston','link','1/15/2019','jasirfetai','nba start');
 
-select * from admin_;
-
-select * from news;
-
-SELECT COUNT(*) 
-FROM news;
 
 ALTER TABLE news
 MODIFY team_code varchar(50);
-
-select distinct sport from news ;
 
 alter table news add column title varchar(500);
 
@@ -52,7 +44,3 @@ alter table news drop column hash_;
 alter table news add column id integer not null primary key auto_increment;
 alter table news add column hash_ varchar(300) not null unique;
 alter table admin_ modify password_ varchar(300);
-
-SELECT * FROM news;
-
-DELETE FROM admin_ WHERE username="testUsername";

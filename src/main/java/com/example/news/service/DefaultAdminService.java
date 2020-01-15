@@ -28,6 +28,7 @@ public class DefaultAdminService implements AdminService{
         return null;
     }
 
+
     @Override
     public Admin signUp(SignUp signUp) {
         Admin admin = adminRepository.findByEmail(signUp.getEmail());
@@ -50,5 +51,10 @@ public class DefaultAdminService implements AdminService{
             return adminRepository.save(admin);
         }
         return null;
+    }
+
+    @Override
+    public void delete(Admin admin) {
+        adminRepository.delete(admin);
     }
 }

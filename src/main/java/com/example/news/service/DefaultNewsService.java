@@ -36,8 +36,9 @@ public class DefaultNewsService implements NewsService {
 
     @Override
     public void deleteNews(final String hash) {
-        if(newsRepository.findOneByHash(hash) != null)
-            newsRepository.delete(newsRepository.findOneByHash(hash));
+        News news = newsRepository.findOneByHash(hash);
+        if( news != null)
+            newsRepository.delete(news);
     }
 
     @Override

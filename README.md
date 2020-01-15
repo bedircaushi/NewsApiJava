@@ -7,9 +7,7 @@ functions.
 Project is consisted about two major entities: admin and news and they have a relationship between them; 
 admin can manipulate with these news.
 
-Web scrapping scripts for desgning a database can be found [here](https://github.com/bedircaushi/JavaApiWebScrapping).
-
-Data definiton language cen be found [here](https://github.com/bedircaushi/JavaApiWebScrapping/blob/master/news/news/news.sql).
+Data definiton language cen be found [here](https://github.com/bedircaushi/NewsApiJava/blob/add/ddl/news.sql).
 
 All the needed dependencies can be found in `pom.xml` file
 

@@ -11,6 +11,8 @@ Web scrapping scripts for desgning a database can be found [here](https://github
 
 Data definiton language cen be found [here](https://github.com/bedircaushi/JavaApiWebScrapping/blob/master/news/news/news.sql).
 
+All the needed dependencies can be found in `pom.xml` file
+
 ## Getting Started
 
 Initially in an empty folder clone the project using this command:

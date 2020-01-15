@@ -16,7 +16,7 @@ public class SignUp {
         this.surname = surname;
         this.address = address;
         this.email = email;
-        this.password = sha224(password);
+        this.password = password;
     }
 
     public String getUsername() {

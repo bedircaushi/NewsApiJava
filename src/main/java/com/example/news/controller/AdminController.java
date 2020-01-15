@@ -88,7 +88,7 @@ public class AdminController {
             return new ResponseEntity<>(news, HttpStatus.OK);
         }
         else
-            return new ResponseEntity<>("Not logged in", HttpStatus.OK);
+            return new ResponseEntity<>(new Message("Not logged in"), HttpStatus.OK);
 
     }
 

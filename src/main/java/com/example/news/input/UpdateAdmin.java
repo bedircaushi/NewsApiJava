@@ -1,5 +1,4 @@
 package com.example.news.input;
-import static com.example.news.input.Hash.sha224;
 
 public class UpdateAdmin {
 
@@ -18,7 +17,7 @@ public class UpdateAdmin {
         this.address = address;
         this.email = email;
         this.password = password;
-        this.newPassword = sha224(newPassword);
+        this.newPassword = newPassword;
     }
 
     public String getUsername() {

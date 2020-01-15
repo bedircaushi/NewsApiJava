@@ -9,7 +9,7 @@ public class LogIn {
 
     public LogIn(String email, String password){
         this.email = email;
-        this.password = sha224(password);
+        this.password =password;
     }
 
     public String getEmail() {

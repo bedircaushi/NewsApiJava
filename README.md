@@ -46,7 +46,7 @@ As we defined earlier, our project support crud services. We will define endpoin
 
 ### News endpoints
 
-**1.** URL: ```http://localhost:8080/news``` Get all news - METHOD = GET
+**1.** URL: ```https://capstone-275019.ew.r.appspot.com/?api_key=d63ddde6-30c0-4869-ab47-633b1d696dfb``` Get all news - METHOD = GET
 
 *Response - List of News objects*
 ```
@@ -67,7 +67,7 @@ As we defined earlier, our project support crud services. We will define endpoin
 ]
 ```
 
-**2.** URL: ```http://localhost:8080/news/<sport>``` Get all news from specific sport - METHOD = GET
+**2.** URL: ```https://capstone-275019.ew.r.appspot.com/<CATEGORY>?api_key=d63ddde6-30c0-4869-ab47-633b1d696dfb``` Get all news from specific <category> - METHOD = GET
 
 *Response - List of News objects*
 ```
@@ -88,7 +88,7 @@ As we defined earlier, our project support crud services. We will define endpoin
 ]
 ```
 
-**3.** URL: ```http://localhost:8080/news/<sport>/<league>``` Get all news from specific sport and league - METHOD = GET
+**3.** URL: ```https://capstone-275019.ew.r.appspot.com/sport/<sport>/<league>?api_key=d63ddde6-30c0-4869-ab47-633b1d696dfb``` Get all news from specific sport and league - METHOD = GET
 
 *Response - List of News objects*
 ```
@@ -109,7 +109,7 @@ As we defined earlier, our project support crud services. We will define endpoin
 ]
 ```
 
-**4.** URL: ```http://localhost:8080/news/add ``` Add news if admin is logged in - METHOD POST, expects JSON body input
+**4.** URL: ```https://capstone-275019.ew.r.appspot.com/<action>/<_hash>?api_key=d63ddde6-30c0-4869-ab47-633b1d696dfb``` updates like,dislike,view actions - METHOD POST, expects JSON body input
 
 *JSON body - News input object*
 ``` 
